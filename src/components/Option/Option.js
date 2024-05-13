@@ -1,3 +1,4 @@
+import { Checkbox } from 'components';
 import './Option.css';
 
 const DISPLAY_NAME = 'option';
