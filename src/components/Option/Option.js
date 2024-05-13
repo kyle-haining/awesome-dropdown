@@ -3,15 +3,26 @@ import './Option.css';
 
 const DISPLAY_NAME = 'option';
 
-function Option({ id, name, value}) {
+function Option({ id, name, value, onClick, children}) {
+  // return (
+  //   <option>
+  //     <>
+  //       <Checkbox id={`${id}-checkbox`} />
+  //       <label className={`${DISPLAY_NAME}-label`} for={`${id}-checkbox`} >
+  //         {children}
+  //       </label>
+  //     </>
+  //   </option>
+  // );
   return (
-    <input
-      type="checkbox"
+    <div
       id={id}
-      name={name}
-      value={value}
-    />
-  );
+      className={DISPLAY_NAME}
+      onClick={() => console.log('10')}
+    >
+      {children}
+    </div>
+  )
 }
 
 export default Option;

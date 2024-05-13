@@ -1,0 +1,12 @@
+.option {
+  padding: 0.375rem 1rem;
+  width: max-content;
+}
+
+.option:hover {
+  background-color: rgb(244, 243, 253);
+}
+
+.option-label {
+  margin-left: 0.5rem;
+}
