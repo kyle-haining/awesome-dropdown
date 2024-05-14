@@ -23,7 +23,6 @@ const Menu = forwardRef(function ({
 }, ref) {
   const [highlightedValue, setHighlightedValue] = useState(selectedValue);
   const [show, setShow] = useState(false);
-  console.log('highlightedValue', highlightedValue, selectedValue);
 
   // Since the logic for opening & closing the Menu is relatively complex,
   // it makes sense to move it into the component itself and expose it via

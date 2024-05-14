@@ -17,7 +17,7 @@ function App() {
             ))
           }
         </Dropdown>
-        <Dropdown defaultValue={values[0]}>
+        <Dropdown defaultOption={{ value: values[1], text: labels[1] }}>
           {
             values.map((value, i) => (
               <Option key={value} value={value}>{labels[i]}</Option>
