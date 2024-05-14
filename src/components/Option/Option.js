@@ -23,7 +23,6 @@ function Option({
 
   const handleClick = (e) => {
     if (hasCheckbox) {
-      // checkboxRef.current.toggleCheck();
       e.stopPropagation();
     }
     onClick(value, text);
