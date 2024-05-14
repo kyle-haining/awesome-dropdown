@@ -1,14 +1,21 @@
 import { Checkbox } from 'components';
+import classNames from 'classnames';
 import './Option.css';
 
 const DISPLAY_NAME = 'option';
 
 function Option({
   value,
+  highlighted,
   children,
+  onMouseOver = () => {},
   onClick = () => {},
   ...rest
 }) {
+  const handleMouseOver = () => {
+    onMouseOver(value);
+  };
+
   const handleClick = () => {
     onClick(value, children);
   };
@@ -27,7 +34,8 @@ function Option({
   return (
     <div
       {...rest}
-      className={DISPLAY_NAME}
+      className={classNames(`${DISPLAY_NAME}-container`, { highlighted })}
+      onMouseOver={handleMouseOver}
       onClick={handleClick}
     >
       {children}

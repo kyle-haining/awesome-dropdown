@@ -1,11 +1,15 @@
-.option {
+.option-container {
   padding: 0.375rem 1rem;
 }
 
-.option:hover {
+/* .option-container:hover {
   background-color: rgb(244, 243, 253);
-}
+} */
 
 .option-label {
   margin-left: 0.5rem;
+}
+
+.highlighted {
+  background-color: rgb(244, 243, 253);
 }

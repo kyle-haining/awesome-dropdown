@@ -4,17 +4,26 @@ import classNames from 'classnames';
 import './Dropdown.css';
 
 const DISPLAY_NAME = 'dropdown';
+const DEFAULT_TEXT = 'Please select';
 const NO_SELECTION_TEXT = 'None';
+const NO_SELECTION_VALUE = null;
 
 function Dropdown({
   id,
   name,
+  onChange, // (val) => {}  or  ([val]) => {}
   children,
-  defaultValue = null,
-  enableNoSelection = false,
-  noSelectionText = NO_SELECTION_TEXT,
+  defaultOption = {}, // { value: '', text: '' }
+  enableNoSelectionOption = false,
+  noSelectionTextOption = NO_SELECTION_TEXT,
 }) {
-  const [displayText, setDisplayText] = useState(NO_SELECTION_TEXT);
+  const firstValue = enableNoSelectionOption
+    ? NO_SELECTION_VALUE : children?.[0]?.props?.value;
+  const firstText = enableNoSelectionOption
+    ? noSelectionTextOption : children?.[0]?.props?.children;
+  console.log('firstValue', firstValue);
+  const [selectedValue, setSelectedValue] = useState(defaultOption.value || firstValue);
+  const [displayText, setDisplayText] = useState(defaultOption.text || firstText);
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = (e) => {
@@ -30,7 +39,7 @@ function Dropdown({
     }
   };
 
-  const handleOptionClick = useCallback((text, children) => {
+  const onMenuChange = useCallback((text, children) => {
     setDisplayText(children);
   }, []);
 
@@ -42,7 +51,12 @@ function Dropdown({
       >
         {displayText}
       </button>
-      <Menu show={showMenu} handleOptionClick={handleOptionClick}>
+      <Menu
+        show={showMenu}
+        selectedValue={selectedValue}
+        enableNoSelectionOption={enableNoSelectionOption}
+        onChange={onMenuChange}
+      >
         {children}
       </Menu>
     </div>

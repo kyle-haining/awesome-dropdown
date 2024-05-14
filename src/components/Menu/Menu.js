@@ -5,29 +5,45 @@ import './Menu.css';
 
 const DISPLAY_NAME = 'menu';
 const NO_SELECTION_TEXT = 'None';
+const NO_SELECTION_VALUE = null;
 
 function Menu({
   id,
   name,
   show,
-  handleOptionClick,
+  onChange, // (val) => {}  or  ([val]) => {}
   children,
-  defaultValue = null,
-  enableNoSelection = false,
-  noSelectionText = NO_SELECTION_TEXT,
+  selectedValue = null,
+  enableNoSelectionOption = false,
+  noSelectionOptionText = NO_SELECTION_TEXT,
 }) {
+  const [highlightedValue, setHighlightedValue] = useState(selectedValue);
+
+  const handleMouseOver = (value) => {
+    setHighlightedValue(value);
+  };
+
   return (
     <div className={classNames(`${DISPLAY_NAME}-container`, { hide: !show })}>
-      {enableNoSelection && (
-        <Option value={null} onClick={handleOptionClick}>
-          <em>{noSelectionText}</em>
-        </Option>
+      {enableNoSelectionOption && (
+        <em>
+          <Option
+            value={NO_SELECTION_VALUE}
+            highlighted={highlightedValue === NO_SELECTION_VALUE}
+            onMouseOver={handleMouseOver}
+            onClick={onChange}
+          >
+            {noSelectionOptionText}
+          </Option>
+        </em>
       )}
       {children.map((Component) => (
         <Option
           {...Component.props}
           key={Component.props.value}
-          onClick={handleOptionClick}
+          highlighted={highlightedValue === Component.props.value}
+          onMouseOver={handleMouseOver}
+          onClick={onChange}
         >
           {Component.props.children}
         </Option>

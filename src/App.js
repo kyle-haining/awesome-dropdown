@@ -10,14 +10,14 @@ function App() {
       <div>React component app</div>
       <br />
       <div style={{display: 'flex', gap: '8rem'}}>
-        <Dropdown enableNoSelection>
+        <Dropdown enableNoSelectionOption>
           {
             values.map((value, i) => (
               <Option key={value} value={value}>{labels[i]}</Option>
             ))
           }
         </Dropdown>
-        <Dropdown>
+        <Dropdown defaultValue={values[0]}>
           {
             values.map((value, i) => (
               <Option key={value} value={value}>{labels[i]}</Option>
