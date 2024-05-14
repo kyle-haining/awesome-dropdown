@@ -4,18 +4,29 @@ import classNames from 'classnames';
 import './Dropdown.css';
 
 const DISPLAY_NAME = 'dropdown';
+const NO_SELECTION_TEXT = 'None';
 
-function Dropdown({ id, name, value, children}) {
-  const [displayText, setDisplayText] = useState('Select a value');
+function Dropdown({
+  id,
+  name,
+  children,
+  defaultValue = null,
+  enableNoSelection = false,
+  noSelectionText = NO_SELECTION_TEXT,
+}) {
+  const [displayText, setDisplayText] = useState(NO_SELECTION_TEXT);
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = (e) => {
     if (!showMenu) {
-      e.stopPropagation();
+      // e.stopPropagation();
       setShowMenu(true);
-      document.addEventListener('click', () => {
+
+      // delay adding event listener, as otherwise current click event
+      // will trigger this
+      setTimeout(() => document.addEventListener('click', () => {
         setShowMenu(false);
-      }, { once: true });
+      }, { once: true }));
     }
   };
 
@@ -24,7 +35,7 @@ function Dropdown({ id, name, value, children}) {
   }, []);
 
   return (
-    <>
+    <div className={`${DISPLAY_NAME}-container`}>
       <button
         className={classNames(`${DISPLAY_NAME}-select`, { open: showMenu })}
         onClick={openMenu}
@@ -32,6 +43,9 @@ function Dropdown({ id, name, value, children}) {
         {displayText}
       </button>
       <div className={classNames(`${DISPLAY_NAME}-menu`, { hide: !showMenu })}>
+        {enableNoSelection && (
+          <em><Option value={null} onClick={handleOptionClick}>{noSelectionText}</Option></em>
+        )}
         {children.map((Component) => (
           <Option
             {...Component.props}
@@ -42,7 +56,7 @@ function Dropdown({ id, name, value, children}) {
           </Option>
         ))}
       </div>
-    </>
+    </div>
   )
 }
 
