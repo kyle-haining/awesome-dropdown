@@ -1,12 +1,10 @@
 import './App.css';
-import { useState } from 'react';
 import { Option, Dropdown } from './components';
 
 const values = ['option-1', 'option-2'];
 const labels = ['This is an option', 'This is another option'];
 
 function App() {
-  const [checked, setChecked] = useState(false);
   return (
     <div id="app-container">
       <div>React dropdown component</div>
