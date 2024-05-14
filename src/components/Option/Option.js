@@ -17,10 +17,7 @@ function Option({
     onMouseOver(value);
   };
 
-  const handleClick = (e) => {
-    if (hasCheckbox) {
-      e.stopPropagation();
-    }
+  const handleClick = () => {
     onClick(value, children);
   };
 

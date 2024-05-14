@@ -1,5 +1,5 @@
 import './App.css';
-import { Option, Dropdown } from './components';
+import { Checkbox, Option, Dropdown } from './components';
 
 const values = ['option-1', 'option-2'];
 const labels = ['This is an option', 'This is another option'];
