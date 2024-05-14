@@ -60,7 +60,8 @@ const SelectMenu = forwardRef(function ({
       )}
       {children.map((Component) => (
         <Option
-          {...Component.props}
+          // {...Component.props}
+          value={Component.props.value}
           key={Component.props.value}
           highlighted={highlightedValues.some((value) => value === Component.props.value)}
           hasCheckbox

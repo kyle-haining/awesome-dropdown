@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Checkbox } from 'components';
 import classNames from 'classnames';
 import './Option.css';
@@ -13,31 +14,42 @@ function Option({
   onClick = () => {},
   ...rest
 }) {
+  const checkboxRef = useRef(null);
+
   const handleMouseOver = () => {
     onMouseOver(value);
   };
 
   const handleClick = (e) => {
-    console.log('handlingClick');
     if (hasCheckbox) {
+      checkboxRef.current.toggleCheck();
+      console.log('handlingClick and stopping');
+      // e.preventDefault();  // checkbox works if this is commented out. Sign works if this is made in.
       e.stopPropagation();
     }
     onClick(value, text);
   };
+
+  // useEffect(() => {
+  //   if (highlighted && checkboxRef.current) {
+  //     console.log('effect running');
+  //     checkboxRef.current.toggleCheck();
+  //     // labelRef.current.checked = !labelRef.current.checked
+  //   }
+  // })
 
   return (
     <div
       {...rest}
       className={classNames(`${DISPLAY_NAME}-container`, { highlighted })}
       onMouseOver={handleMouseOver}
-      // onClick={handleClick}
+      onClick={(e) => { console.log('here2'); handleClick(e, true)}}
     >
       {hasCheckbox ? (
-        <label>
-          <Checkbox value={value} checked={highlighted} onChange={handleClick} />
-          {/* {text} */}
+        <>
+          <Checkbox ref={checkboxRef} value={value} />
           <span>{text}</span>
-        </label>
+        </>
         ) : text
       }
     </div>
