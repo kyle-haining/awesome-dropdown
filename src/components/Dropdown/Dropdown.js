@@ -28,6 +28,7 @@ const NO_SELECTION_VALUE = '';
  */
 function Dropdown({
   onChange, // (val) => {}  or  ([val]) => {}
+  label,
   children,
   multiSelect = false,
   defaultOption = {},
@@ -53,7 +54,6 @@ function Dropdown({
   const displayText = useMemo(() => {
     return selectedTexts.join(TEXT_SEPARATOR) || specialSelectionOptionText
   }, [selectedTexts, specialSelectionOptionText]);
-  // const [displayText, setDisplayText] = useState(initialSelectedTexts);
   const [isAllSelected, setIsAllSelected] = useState(false);
   const [showbuttonOpenStyle, setShowButtonOpenStyle] = useState(false);
   const menuRef = useRef();
@@ -111,24 +111,32 @@ function Dropdown({
   };
 
   return (
-    <div className={`${DISPLAY_NAME}-container`}>
-      <button
-        className={classNames(`${DISPLAY_NAME}-select`, { open: showbuttonOpenStyle })}
-        onClick={openMenu}
-      >
-        {displayText}
-      </button>
-      <Menu
-        ref={menuRef}
-        multiSelect={multiSelect}
-        setShowButtonOpenStyle={setShowButtonOpenStyle}
-        selectedValues={selectedValues}
-        enableSpecialSelectionOption={enableSpecialSelectionOption}
-        onChange={onMenuChange}
-        onSelectAll={onSelectAll}
-      >
-        {children}
-      </Menu>
+    <div className={classNames(
+      `${DISPLAY_NAME}`,
+      { 'open-label': showbuttonOpenStyle }
+    )}>
+      <div className={`${DISPLAY_NAME}-label`}>
+        {label}
+      </div>
+      <div className={`${DISPLAY_NAME}-container`}>
+        <button
+          className={classNames(`${DISPLAY_NAME}-select`, { open: showbuttonOpenStyle })}
+          onClick={openMenu}
+        >
+          {displayText}
+        </button>
+        <Menu
+          ref={menuRef}
+          multiSelect={multiSelect}
+          setShowButtonOpenStyle={setShowButtonOpenStyle}
+          selectedValues={selectedValues}
+          enableSpecialSelectionOption={enableSpecialSelectionOption}
+          onChange={onMenuChange}
+          onSelectAll={onSelectAll}
+        >
+          {children}
+        </Menu>
+      </div>
     </div>
   )
 }

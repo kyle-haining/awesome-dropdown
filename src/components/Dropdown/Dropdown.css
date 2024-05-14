@@ -1,3 +1,8 @@
+.dropdown:hover {
+  border-color: rgba(65, 128, 209);
+  color: rgb(37, 108, 167);
+}
+
 .dropdown-select {
   position: relative;
   padding: 0.5rem 1rem;
@@ -9,10 +14,19 @@
   font-size: 1rem;
 }
 
+.dropdown-label {
+  margin-bottom: 0.25rem;
+  margin-left: 0.125rem;
+}
+
 .dropdown-select:hover {
   border-color: rgba(65, 128, 209);
 }
 
 .open {
   border-color: rgba(65, 128, 209);
+}
+
+.open-label {
+  color: rgb(37, 108, 167);
 }

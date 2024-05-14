@@ -12,14 +12,17 @@ function App() {
       <div>React component app</div>
       <br />
       <div style={{display: 'flex', gap: '8rem'}}>
-        <Dropdown enableSpecialSelectionOption>
+        <Dropdown enableSpecialSelectionOption label="Tag">
           {
             values.map((value, i) => (
               <Option key={value} value={value}>{labels[i]}</Option>
             ))
           }
         </Dropdown>
-        <Dropdown defaultOption={{ value: values[1], text: labels[1] }}>
+        <Dropdown
+          label="Age"
+          defaultOption={{ value: values[1], text: labels[1] }}
+        >
           {
             values.map((value, i) => (
               <Option key={value} value={value}>{labels[i]}</Option>
