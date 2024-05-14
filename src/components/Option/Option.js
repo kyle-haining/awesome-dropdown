@@ -3,7 +3,11 @@ import './Option.css';
 
 const DISPLAY_NAME = 'option';
 
-function Option({ id, name, value, onClick, children}) {
+function Option({ value, children, onClick = () => {}, ...rest }) {
+  const handleClick = () => {
+    onClick(value, children);
+  };
+
   // return (
   //   <option>
   //     <>
@@ -14,11 +18,12 @@ function Option({ id, name, value, onClick, children}) {
   //     </>
   //   </option>
   // );
+  console.log('render Option!');
   return (
     <div
-      id={id}
+      {...rest}
       className={DISPLAY_NAME}
-      onClick={() => console.log('10')}
+      onClick={handleClick}
     >
       {children}
     </div>

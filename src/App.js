@@ -1,14 +1,20 @@
 import './App.css';
 import { Checkbox, Option, Dropdown } from './components';
 
+const values = ['option-1', 'option-2'];
+const labels = ['This is an option', 'This is another option'];
+
 function App() {
   return (
     <div id="app-container">
       <div>React component app</div>
       <br />
       <Dropdown>
-        <Option id="option-1" >This is an option</Option>
-        <Option id="option-2" >This is another option</Option>
+        {
+          values.map((value, i) => (
+            <Option key={value} value={value}>{labels[i]}</Option>
+          ))
+        }
       </Dropdown>
 
 

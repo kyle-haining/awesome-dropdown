@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Option } from 'components';
 import classNames from 'classnames';
 import './Dropdown.css';
@@ -6,30 +6,41 @@ import './Dropdown.css';
 const DISPLAY_NAME = 'dropdown';
 
 function Dropdown({ id, name, value, children}) {
+  const [displayText, setDisplayText] = useState('Select a value');
   const [showMenu, setShowMenu] = useState(false);
 
-  const toggleMenu = (e) => {
-
+  const openMenu = (e) => {
     if (!showMenu) {
-      setShowMenu(true);
       e.stopPropagation();
+      setShowMenu(true);
       document.addEventListener('click', () => {
         setShowMenu(false);
-        console.log('clicked');
       }, { once: true });
     }
   };
+
+  const handleOptionClick = useCallback((text, children) => {
+    setDisplayText(children);
+  }, []);
 
   return (
     <>
       <button
         className={classNames(`${DISPLAY_NAME}-select`, { open: showMenu })}
-        onClick={toggleMenu}
+        onClick={openMenu}
       >
-        Select
+        {displayText}
       </button>
       <div className={classNames(`${DISPLAY_NAME}-menu`, { hide: !showMenu })}>
-        {children}
+        {children.map((Component) => (
+          <Option
+            {...Component.props}
+            key={Component.props.value}
+            onClick={handleOptionClick}
+          >
+            {Component.props.children}
+          </Option>
+        ))}
       </div>
     </>
   )
