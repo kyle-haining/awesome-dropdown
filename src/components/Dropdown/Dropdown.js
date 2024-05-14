@@ -5,7 +5,7 @@ import './Dropdown.css';
 
 const DISPLAY_NAME = 'dropdown';
 const SINGLE_SPECIAL_SELECTION_TEXT = 'None';
-const MULTI_SPECIAL_SELECTION_TEXT = 'Select all';
+const MULTI_SPECIAL_SELECTION_TEXT = 'Please select';
 const SPECIAL_SELECTION = {
   true: MULTI_SPECIAL_SELECTION_TEXT,
   false: SINGLE_SPECIAL_SELECTION_TEXT
@@ -13,11 +13,24 @@ const SPECIAL_SELECTION = {
 const TEXT_SEPARATOR = ', ';
 const NO_SELECTION_VALUE = '';
 
+/**
+ * multiSelect - true for a multi-selection dropdown, false for single-selection
+ * defaultOption - default selected option for single-selection dropdown, in
+ *   the form of { value: '', text: '' }. If no default is given, the special
+ *   selection option is used if provided, and if not then the first option
+ *   is used.
+ * enableSpecialSelectionOption - for single-selection dropdowns, this enables
+ *   a non-selection opton. For multi-selection dropdowns, this enables a
+ *   select / deselect all option.
+ * specialSelectionOptionText - the text to be displayed by the special selection
+ *   option. Default is `None` for single-selection and `Select all` for multi-
+ *   selection
+ */
 function Dropdown({
   onChange, // (val) => {}  or  ([val]) => {}
   children,
   multiSelect = false,
-  defaultOption = {}, // { value: '', text: '' }
+  defaultOption = {},
   enableSpecialSelectionOption = false,
   specialSelectionOptionText = SPECIAL_SELECTION[multiSelect]
 }) {
