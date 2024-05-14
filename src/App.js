@@ -17,7 +17,7 @@ function App() {
     <div id="app-container">
       <div>React dropdown component</div>
       <br />
-      <Dropdown enableSpecialSelectionOption label="Tag">
+      <Dropdown enableSpecialSelectionOption label="Time">
         {
           values1.map((value, i) => (
             <Option key={value} value={value}>{labels1[i]}</Option>
@@ -27,7 +27,7 @@ function App() {
       <br />
       <br />
       <Dropdown
-          label="Age"
+          label="Options"
           defaultOption={{ value: values[1], text: labels[1] }}
         >
           {
