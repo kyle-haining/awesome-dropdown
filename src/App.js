@@ -44,22 +44,7 @@ function App() {
           }
         </Dropdown>
       </div>
-      <label>
-          <Checkbox value={1} checked={checked} onChange={() => setChecked(!checked)} />
-          {/* {text} */}
-          <span>Hello</span>
-        </label>
-      {/* <SelectMenu multiselect defaultOption={{ value: values[1], text: labels[1] }}>
-        {
-          values.map((value, i) => (
-            <Option key={value} value={value}>{labels[i]}</Option>
-          ))
-        }
-      </SelectMenu> */}
       {/* <div>Test</div> */}
-
-
-      {/* <button onClick={() => console.log('10')}>10</button> */}
     </div>
   );
 }
