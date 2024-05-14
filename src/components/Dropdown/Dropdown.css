@@ -13,18 +13,6 @@
   border-color: rgba(65, 128, 209);
 }
 
-.dropdown-menu {
-  position: absolute;
-  width: max-content;
-  border-radius: 0.25rem;
-  /* box-shadow: 0.25rem 0.25rem 1rem rgb(153, 153, 153), -0.25rem -025rem 1rem rgb(153, 153, 153); */
-  box-shadow: 0rem 0rem 1rem rgb(153, 153, 153);
-}
-
 .open {
   border-color: rgba(65, 128, 209);
-}
-
-.hide {
-  display: none;
 }

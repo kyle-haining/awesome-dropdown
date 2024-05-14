@@ -9,13 +9,23 @@ function App() {
     <div id="app-container">
       <div>React component app</div>
       <br />
-      <Dropdown>
-        {
-          values.map((value, i) => (
-            <Option key={value} value={value}>{labels[i]}</Option>
-          ))
-        }
-      </Dropdown>
+      <div style={{display: 'flex', gap: '8rem'}}>
+        <Dropdown enableNoSelection>
+          {
+            values.map((value, i) => (
+              <Option key={value} value={value}>{labels[i]}</Option>
+            ))
+          }
+        </Dropdown>
+        <Dropdown>
+          {
+            values.map((value, i) => (
+              <Option key={value} value={value}>{labels[i]}</Option>
+            ))
+          }
+        </Dropdown>
+      </div>
+      {/* <div>Test</div> */}
 
 
       {/* <button onClick={() => console.log('10')}>10</button> */}

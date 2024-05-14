@@ -3,7 +3,12 @@ import './Option.css';
 
 const DISPLAY_NAME = 'option';
 
-function Option({ value, children, onClick = () => {}, ...rest }) {
+function Option({
+  value,
+  children,
+  onClick = () => {},
+  ...rest
+}) {
   const handleClick = () => {
     onClick(value, children);
   };

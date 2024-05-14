@@ -1,0 +1,12 @@
+.menu-container  {
+  position: absolute;
+  width: max-content;
+  background-color: white;
+  border-radius: 0.25rem;
+  /* box-shadow: 0.25rem 0.25rem 1rem rgb(153, 153, 153), -0.25rem -025rem 1rem rgb(153, 153, 153); */
+  box-shadow: 0rem 0rem 1rem rgb(153, 153, 153);
+}
+
+.hide {
+  display: none;
+}

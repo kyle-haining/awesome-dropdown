@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Option } from 'components';
+import { Menu, Option } from 'components';
 import classNames from 'classnames';
 import './Dropdown.css';
 
@@ -42,20 +42,9 @@ function Dropdown({
       >
         {displayText}
       </button>
-      <div className={classNames(`${DISPLAY_NAME}-menu`, { hide: !showMenu })}>
-        {enableNoSelection && (
-          <em><Option value={null} onClick={handleOptionClick}>{noSelectionText}</Option></em>
-        )}
-        {children.map((Component) => (
-          <Option
-            {...Component.props}
-            key={Component.props.value}
-            onClick={handleOptionClick}
-          >
-            {Component.props.children}
-          </Option>
-        ))}
-      </div>
+      <Menu show={showMenu} handleOptionClick={handleOptionClick}>
+        {children}
+      </Menu>
     </div>
   )
 }
