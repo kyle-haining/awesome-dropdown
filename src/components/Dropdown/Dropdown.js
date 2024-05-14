@@ -1,18 +1,18 @@
 import { useState, useRef, useCallback } from 'react';
-import { Menu, Option } from 'components';
+import { Menu } from 'components';
 import classNames from 'classnames';
 import './Dropdown.css';
 
 const DISPLAY_NAME = 'dropdown';
-const DEFAULT_TEXT = 'Please select';
 const NO_SELECTION_TEXT = 'None';
-const NO_SELECTION_VALUE = null;
+const NO_SELECTION_VALUE = '';
 
 function Dropdown({
   id,
   name,
   onChange, // (val) => {}  or  ([val]) => {}
   children,
+  multiselect = false,
   defaultOption = {}, // { value: '', text: '' }
   enableNoSelectionOption = false,
   noSelectionTextOption = NO_SELECTION_TEXT,
@@ -47,6 +47,7 @@ function Dropdown({
         ref={menuRef}
         show={showMenu}
         selectedValue={selectedValue}
+        multiselect={multiselect}
         enableNoSelectionOption={enableNoSelectionOption}
         onChange={onMenuChange}
       >
