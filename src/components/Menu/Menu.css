@@ -1,5 +1,7 @@
 .menu-container  {
   position: absolute;
+  max-height: 10rem;
+  overflow-y: auto;
   width: max-content;
   color: black;
   background-color: white;

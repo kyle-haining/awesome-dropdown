@@ -4,6 +4,14 @@ import { Option, Dropdown } from './components';
 const values = ['option-1', 'option-2'];
 const labels = ['This is an option', 'This is another option'];
 
+const values1 = ['option-1', 'option-2', 'option-3', 'option-4', 'option-5', 'option-6', 'option-7'];
+const labels1 = ['1 second', '8 second', '15 second', '22 second', '29 second', '36 second', '43 second'];
+
+const values2 = ['option-1', 'option-2', 'option-3'];
+const labels2 = [
+  'This is a clothing group', 'This is a food group', 'This is a movie group'
+];
+
 function App() {
   return (
     <div id="app-container">
@@ -11,8 +19,8 @@ function App() {
       <br />
       <Dropdown enableSpecialSelectionOption label="Tag">
         {
-          values.map((value, i) => (
-            <Option key={value} value={value}>{labels[i]}</Option>
+          values1.map((value, i) => (
+            <Option key={value} value={value}>{labels1[i]}</Option>
           ))
         }
       </Dropdown>
@@ -32,8 +40,8 @@ function App() {
       <br />
       <Dropdown multiSelect enableSpecialSelectionOption label="Groups">
           {
-            values.map((value, i) => (
-              <Option key={value} value={value}>{labels[i]}</Option>
+            values2.map((value, i) => (
+              <Option key={value} value={value}>{labels2[i]}</Option>
             ))
           }
         </Dropdown>
