@@ -17,7 +17,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ## References
 
-Sources I referenced while coding this project included:
+Some of the sources I referenced while coding this project included:
 - Mozilla Documentation
 - StackOverflow
 - React official documentation
