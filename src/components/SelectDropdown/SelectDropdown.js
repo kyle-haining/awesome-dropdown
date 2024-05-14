@@ -50,6 +50,9 @@ function SelectDropdown({
         newSelectedValues = newSelectedValues.toSpliced(specialSelectionindex, 1);
       }
       setIsAllSelected(false);
+    } else if (newSelectedValues.length === children.length) {
+      newSelectedValues.push(NO_SELECTION_VALUE);
+      setIsAllSelected(true);
     }
     setSelectedValues(newSelectedValues);
     setSelectedTexts(newSelectedTexts);
