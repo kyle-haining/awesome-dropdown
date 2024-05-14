@@ -1,5 +1,5 @@
-import { useState, useRef, useCallback } from 'react';
-import { SelectMenu, Option } from 'components';
+import { useState, useRef, useMemo, useCallback } from 'react';
+import { SelectMenu } from 'components';
 import classNames from 'classnames';
 import './SelectDropdown.css';
 
@@ -21,7 +21,13 @@ function SelectDropdown({
   const firstText = enableNoSelectionOption
     ? noSelectionTextOption : children?.[0]?.props?.children;
   const [selectedValues, setSelectedValues] = useState([]);
-  const [displayText, setDisplayText] = useState(noSelectionTextOption);
+  const [selectedTexts, setSelectedTexts] = useState([]);
+  console.log('selectedValues', selectedValues);
+  console.log('selectedTexts', selectedTexts);
+  console.log(' ');
+  const displayText = useMemo(() => {
+    return selectedTexts.join(', ') || noSelectionTextOption
+  }, [selectedTexts, noSelectionTextOption]);
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef();
 
@@ -33,11 +39,12 @@ function SelectDropdown({
     const index = selectedValues.findIndex((v) => v === value);
     if (index === -1) {
       setSelectedValues([...selectedValues, value]);
+      setSelectedTexts([...selectedTexts, text]);
     } else {
       setSelectedValues(selectedValues.toSpliced(index, 1));
+      setSelectedTexts(selectedTexts.toSpliced(index, 1));
     }
-    setDisplayText(text);
-  }, [selectedValues]);
+  }, [selectedValues, selectedTexts]);
 
   return (
     <div className={`${DISPLAY_NAME}-container`}>
