@@ -17,6 +17,7 @@ function SelectDropdown({
 }) {
   const [selectedValues, setSelectedValues] = useState([]);
   const [selectedTexts, setSelectedTexts] = useState([]);
+  const [isAllSelected, setIsAllSelected] = useState(false);
   console.log('selectedValues', selectedValues);
   console.log('selectedTexts', selectedTexts);
   console.log('selecting all', children)
@@ -44,12 +45,19 @@ function SelectDropdown({
   }, [selectedValues, selectedTexts]);
 
   const onSelectAll = () => {
-    const allSelectedValues = children.map(({ props: { value }}) => value);
-    if (enableNoSelectionOption) {
-      allSelectedValues.push(NO_SELECTION_VALUE);
+    if (!isAllSelected) {
+      const allSelectedValues = children.map(({ props: { value }}) => value);
+      if (enableNoSelectionOption) {
+        allSelectedValues.push(NO_SELECTION_VALUE);
+      }
+      setSelectedValues(allSelectedValues);
+      setSelectedTexts(children.map(({ props: { children }}) => children));
+      setIsAllSelected(true);
+    } else {
+      setSelectedValues([]);
+      setSelectedTexts([]);
+      setIsAllSelected(false);
     }
-    setSelectedValues(allSelectedValues);
-    setSelectedTexts(children.map(({ props: { children }}) => children));
   };
 
   return (
