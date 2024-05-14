@@ -21,12 +21,12 @@ const Menu = forwardRef(function ({
   enableNoSelectionOption = false,
   noSelectionOptionText = NO_SELECTION_TEXT,
 }, ref) {
-  const [highlightedValues, setHighlightedValues] = useState([selectedValue]);
+  const [highlightedValue, setHighlightedValue] = useState(selectedValue);
   const [show, setShow] = useState(false);
 
   // Since the logic for opening & closing the Menu is relatively complex,
   // it makes sense to move it into the component itself and expose it via
-  // useImperativeHandle, that way the logic doesn't need to be duplicated
+  // useImperativeHandle, that way the logic doesn't need to be ducpliated
   // across all parent components that may use the Menu component
   useImperativeHandle(ref, () => {
     return {
@@ -40,13 +40,13 @@ const Menu = forwardRef(function ({
             setShow(false);
           }, { once: true }));
         }
-        setHighlightedValues([selectedValue]);
+        setHighlightedValue(selectedValue);
       }
     };
   }, [selectedValue, show]);
 
   const handleMouseOver = (value) => {
-    setHighlightedValues([value]);
+    setHighlightedValue(value);
   };
 
   return (
@@ -55,7 +55,7 @@ const Menu = forwardRef(function ({
         <em>
           <Option
             value={NO_SELECTION_VALUE}
-            highlighted={highlightedValues.some((value) => value === NO_SELECTION_VALUE)}
+            highlighted={highlightedValue === NO_SELECTION_VALUE}
             hasCheckbox={multiselect}
             onMouseOver={handleMouseOver}
             onClick={onChange}
@@ -68,7 +68,7 @@ const Menu = forwardRef(function ({
         <Option
           {...Component.props}
           key={Component.props.value}
-          highlighted={highlightedValues.some((value) => value === Component.props.value)}
+          highlighted={highlightedValue === Component.props.value}
           hasCheckbox={multiselect}
           onMouseOver={handleMouseOver}
           onClick={onChange}
