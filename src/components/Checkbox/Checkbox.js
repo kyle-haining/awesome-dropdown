@@ -1,9 +1,9 @@
-import { useState, forwardRef, useImperativeHandle } from 'react';
+import { useState, useImperativeHandle, forwardRef } from 'react';
 import './Checkbox.css';
 
 const DISPLAY_NAME = 'checkbox';
 
-const Checkbox = forwardRef(function ({ value, defaultChecked, onChange = () => {} }, ref) {
+const Checkbox = forwardRef(function ({ ariaLabeledBy }, ref) {
   const [checked, setChecked] = useState(false);
   useImperativeHandle(ref, () => {
     return {
@@ -14,19 +14,13 @@ const Checkbox = forwardRef(function ({ value, defaultChecked, onChange = () => 
   });
 
   return (
-    // <div className={`${DISPLAY_NAME}-container`} onClick={(e) => {
-    //   e.stopPropagation();
-    //   e.preventDefault();
-    //   console.log('click div')
-    // }}>
-      <input
-        className={DISPLAY_NAME}
-        type="checkbox"
-        checked={checked}
-        defaultChecked={defaultChecked}
-        onChange={onChange}
-      />
-    // </div>
+    <input
+      className={DISPLAY_NAME}
+      aria-labelledby={ariaLabeledBy}
+      readOnly
+      type="checkbox"
+      checked={checked}
+    />
   );
 });
 
