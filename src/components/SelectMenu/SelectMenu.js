@@ -36,6 +36,7 @@ const SelectMenu = forwardRef(function ({
           // delay adding event listener, as otherwise current click event
           // will trigger this
           setTimeout(() => document.addEventListener('click', () => {
+            console.log('closing menu listener');
             setShow(false);
           }, { once: true }));
         }

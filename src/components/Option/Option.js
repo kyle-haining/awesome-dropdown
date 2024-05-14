@@ -18,6 +18,7 @@ function Option({
   };
 
   const handleClick = (e) => {
+    console.log('handlingClick');
     if (hasCheckbox) {
       e.stopPropagation();
     }
@@ -29,12 +30,13 @@ function Option({
       {...rest}
       className={classNames(`${DISPLAY_NAME}-container`, { highlighted })}
       onMouseOver={handleMouseOver}
-      onClick={handleClick}
+      // onClick={handleClick}
     >
       {hasCheckbox ? (
         <label>
-          <Checkbox value={value} checked={highlighted} />
-          {text}
+          <Checkbox value={value} checked={highlighted} onChange={handleClick} />
+          {/* {text} */}
+          <span>{text}</span>
         </label>
         ) : text
       }
