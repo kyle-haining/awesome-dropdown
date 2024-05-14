@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { Menu, Option } from 'components';
 import classNames from 'classnames';
 import './Dropdown.css';
@@ -21,25 +21,17 @@ function Dropdown({
     ? NO_SELECTION_VALUE : children?.[0]?.props?.value;
   const firstText = enableNoSelectionOption
     ? noSelectionTextOption : children?.[0]?.props?.children;
-  console.log('firstValue', firstValue);
   const [selectedValue, setSelectedValue] = useState(defaultOption.value || firstValue);
   const [displayText, setDisplayText] = useState(defaultOption.text || firstText);
   const [showMenu, setShowMenu] = useState(false);
+  const menuRef = useRef();
 
-  const openMenu = (e) => {
-    if (!showMenu) {
-      // e.stopPropagation();
-      setShowMenu(true);
-
-      // delay adding event listener, as otherwise current click event
-      // will trigger this
-      setTimeout(() => document.addEventListener('click', () => {
-        setShowMenu(false);
-      }, { once: true }));
-    }
+  const openMenu = () => {
+    menuRef.current.open();
   };
 
-  const onMenuChange = useCallback((text, children) => {
+  const onMenuChange = useCallback((value, children) => {
+    setSelectedValue(value);
     setDisplayText(children);
   }, []);
 
@@ -52,6 +44,7 @@ function Dropdown({
         {displayText}
       </button>
       <Menu
+        ref={menuRef}
         show={showMenu}
         selectedValue={selectedValue}
         enableNoSelectionOption={enableNoSelectionOption}

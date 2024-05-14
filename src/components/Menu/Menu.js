@@ -1,4 +1,9 @@
-import { useState, useCallback } from 'react';
+import {
+  useState,
+  useCallback,
+  useImperativeHandle,
+  forwardRef
+} from 'react';
 import { Option } from 'components';
 import classNames from 'classnames';
 import './Menu.css';
@@ -7,17 +12,39 @@ const DISPLAY_NAME = 'menu';
 const NO_SELECTION_TEXT = 'None';
 const NO_SELECTION_VALUE = null;
 
-function Menu({
+const Menu = forwardRef(function ({
   id,
   name,
-  show,
   onChange, // (val) => {}  or  ([val]) => {}
   children,
   selectedValue = null,
   enableNoSelectionOption = false,
   noSelectionOptionText = NO_SELECTION_TEXT,
-}) {
+}, ref) {
   const [highlightedValue, setHighlightedValue] = useState(selectedValue);
+  const [show, setShow] = useState(false);
+  console.log('highlightedValue', highlightedValue, selectedValue);
+
+  // Since the logic for opening & closing the Menu is relatively complex,
+  // it makes sense to move it into the component itself and expose it via
+  // useImperativeHandle, that way the logic doesn't need to be ducpliated
+  // across all parent components that may use the Menu component
+  useImperativeHandle(ref, () => {
+    return {
+      open: () => {
+        if (!show) {
+          setShow(true);
+    
+          // delay adding event listener, as otherwise current click event
+          // will trigger this
+          setTimeout(() => document.addEventListener('click', () => {
+            setShow(false);
+          }, { once: true }));
+        }
+        setHighlightedValue(selectedValue);
+      }
+    };
+  }, [selectedValue, show]);
 
   const handleMouseOver = (value) => {
     setHighlightedValue(value);
@@ -50,6 +77,6 @@ function Menu({
       ))}
     </div>
   )
-}
+});
 
 export default Menu;
