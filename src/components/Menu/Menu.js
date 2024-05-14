@@ -1,6 +1,5 @@
 import {
   useState,
-  useCallback,
   useImperativeHandle,
   forwardRef
 } from 'react';
@@ -10,7 +9,7 @@ import './Menu.css';
 
 const DISPLAY_NAME = 'menu';
 const NO_SELECTION_TEXT = 'None';
-const NO_SELECTION_VALUE = null;
+const NO_SELECTION_VALUE = '';
 
 const Menu = forwardRef(function ({
   id,

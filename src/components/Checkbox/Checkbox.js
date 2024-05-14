@@ -2,13 +2,11 @@ import './Checkbox.css';
 
 const DISPLAY_NAME = 'checkbox';
 
-function Checkbox({ id, name, value}) {
+function Checkbox({ value }) {
   return (
     <input
+      className={DISPLAY_NAME}
       type="checkbox"
-      id={id}
-      name={name}
-      value={value}
     />
   );
 }
