@@ -33,16 +33,27 @@ function SelectDropdown({
     menuRef.current.open();
   };
 
-  const onMenuChange = useCallback((value, text) => {
+  const onMenuChange = (value, text) => {
     const index = selectedValues.findIndex((v) => v === value);
+    let newSelectedValues;
+    let newSelectedTexts;
     if (index === -1) {
-      setSelectedValues([...selectedValues, value]);
-      setSelectedTexts([...selectedTexts, text]);
+      newSelectedValues = [...selectedValues, value];
+      newSelectedTexts = [...selectedTexts, text];
     } else {
-      setSelectedValues(selectedValues.toSpliced(index, 1));
-      setSelectedTexts(selectedTexts.toSpliced(index, 1));
+      newSelectedValues = selectedValues.toSpliced(index, 1);
+      newSelectedTexts = selectedTexts.toSpliced(index, 1);
     }
-  }, [selectedValues, selectedTexts]);
+    if (isAllSelected) {
+      const specialSelectionindex = newSelectedValues.findIndex((v) => v === NO_SELECTION_VALUE);
+      if (specialSelectionindex !== -1) {
+        newSelectedValues = newSelectedValues.toSpliced(specialSelectionindex, 1);
+      }
+      setIsAllSelected(false);
+    }
+    setSelectedValues(newSelectedValues);
+    setSelectedTexts(newSelectedTexts);
+  };
 
   const onSelectAll = () => {
     if (!isAllSelected) {
