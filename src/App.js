@@ -9,17 +9,18 @@ function App() {
   const [checked, setChecked] = useState(false);
   return (
     <div id="app-container">
-      <div>React component app</div>
+      <div>React dropdown component</div>
       <br />
-      <div style={{display: 'flex', gap: '8rem'}}>
-        <Dropdown enableSpecialSelectionOption label="Tag">
-          {
-            values.map((value, i) => (
-              <Option key={value} value={value}>{labels[i]}</Option>
-            ))
-          }
-        </Dropdown>
-        <Dropdown
+      <Dropdown enableSpecialSelectionOption label="Tag">
+        {
+          values.map((value, i) => (
+            <Option key={value} value={value}>{labels[i]}</Option>
+          ))
+        }
+      </Dropdown>
+      <br />
+      <br />
+      <Dropdown
           label="Age"
           defaultOption={{ value: values[1], text: labels[1] }}
         >
@@ -29,24 +30,15 @@ function App() {
             ))
           }
         </Dropdown>
-      </div>
       <br />
-      <div style={{display: 'flex', gap: '8rem'}}>
-        <Dropdown multiSelect enableSpecialSelectionOption>
+      <br />
+      <Dropdown multiSelect enableSpecialSelectionOption label="Groups">
           {
             values.map((value, i) => (
               <Option key={value} value={value}>{labels[i]}</Option>
             ))
           }
         </Dropdown>
-        <Dropdown multiSelect defaultOption={{ value: values[1], text: labels[1] }}>
-          {
-            values.map((value, i) => (
-              <Option key={value} value={value}>{labels[i]}</Option>
-            ))
-          }
-        </Dropdown>
-      </div>
     </div>
   );
 }
