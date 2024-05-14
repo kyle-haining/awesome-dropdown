@@ -4,7 +4,7 @@ import './Checkbox.css';
 const DISPLAY_NAME = 'checkbox';
 
 const Checkbox = forwardRef(function ({ ariaLabeledBy }, ref) {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
   useImperativeHandle(ref, () => {
     return {
       toggleCheck: () => {

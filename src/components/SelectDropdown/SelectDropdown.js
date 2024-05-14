@@ -5,28 +5,25 @@ import './SelectDropdown.css';
 
 const DISPLAY_NAME = 'dropdown';
 const NO_SELECTION_TEXT = 'Please select';
+const TEXT_SEPARATOR = ', ';
 const NO_SELECTION_VALUE = '';
 
 function SelectDropdown({
-  id,
-  name,
   onChange, // (val) => {}  or  ([val]) => {}
   children,
   defaultOption = {}, // { value: '', text: '' }
   enableNoSelectionOption = false,
   noSelectionTextOption = NO_SELECTION_TEXT,
 }) {
-  const firstValue = enableNoSelectionOption
-    ? NO_SELECTION_VALUE : children?.[0]?.props?.value;
-  const firstText = enableNoSelectionOption
-    ? noSelectionTextOption : children?.[0]?.props?.children;
   const [selectedValues, setSelectedValues] = useState([]);
   const [selectedTexts, setSelectedTexts] = useState([]);
   console.log('selectedValues', selectedValues);
   console.log('selectedTexts', selectedTexts);
+  console.log('selecting all', children)
+  console.log('values are', children.map(({ props: { children }}) => children));
   console.log(' ');
   const displayText = useMemo(() => {
-    return selectedTexts.join(', ') || noSelectionTextOption
+    return selectedTexts.join(TEXT_SEPARATOR) || noSelectionTextOption
   }, [selectedTexts, noSelectionTextOption]);
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef();
@@ -46,6 +43,15 @@ function SelectDropdown({
     }
   }, [selectedValues, selectedTexts]);
 
+  const onSelectAll = () => {
+    const allSelectedValues = children.map(({ props: { value }}) => value);
+    if (enableNoSelectionOption) {
+      allSelectedValues.push(NO_SELECTION_VALUE);
+    }
+    setSelectedValues(allSelectedValues);
+    setSelectedTexts(children.map(({ props: { children }}) => children));
+  };
+
   return (
     <div className={`${DISPLAY_NAME}-container`}>
       <button
@@ -60,6 +66,7 @@ function SelectDropdown({
         selectedValues={selectedValues}
         enableNoSelectionOption={enableNoSelectionOption}
         onChange={onMenuChange}
+        onSelectAll={onSelectAll}
       >
         {children}
       </SelectMenu>

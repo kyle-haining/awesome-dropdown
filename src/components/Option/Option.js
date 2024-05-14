@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Checkbox } from 'components';
 import classNames from 'classnames';
 import './Option.css';
@@ -23,11 +23,17 @@ function Option({
 
   const handleClick = (e) => {
     if (hasCheckbox) {
-      checkboxRef.current.toggleCheck();
+      // checkboxRef.current.toggleCheck();
       e.stopPropagation();
     }
     onClick(value, text);
   };
+
+  useEffect(() => {
+    if (checkboxRef.current) {
+      checkboxRef.current.toggleCheck();
+    }
+  }, [highlighted, checkboxRef])
 
   return (
     <div

@@ -8,13 +8,14 @@ import classNames from 'classnames';
 import './SelectMenu.css';
 
 const DISPLAY_NAME = 'menu';
-const NO_SELECTION_TEXT = 'None';
+const NO_SELECTION_TEXT = 'Select all';
 const NO_SELECTION_VALUE = '';
 
 const SelectMenu = forwardRef(function ({
   id,
   name,
   onChange, // (val) => {}  or  ([val]) => {}
+  onSelectAll,
   children,
   selectedValues = [],
   enableNoSelectionOption = false,
@@ -52,7 +53,7 @@ const SelectMenu = forwardRef(function ({
             value={NO_SELECTION_VALUE}
             highlighted={highlightedValues.some((value) => value === NO_SELECTION_VALUE)}
             hasCheckbox
-            onClick={onChange}
+            onClick={onSelectAll}
           >
             {noSelectionOptionText}
           </Option>
