@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { Menu } from 'components';
 import classNames from 'classnames';
 import './Dropdown.css';
@@ -14,6 +14,7 @@ const TEXT_SEPARATOR = ', ';
 const NO_SELECTION_VALUE = '';
 
 /**
+ * onChange - provide callback to receive updates from the component
  * multiSelect - true for a multi-selection dropdown, false for single-selection
  * defaultOption - default selected option for single-selection dropdown, in
  *   the form of { value: '', text: '' }. If no default is given, the special
@@ -31,6 +32,7 @@ function Dropdown({
   children,
   multiSelect = false,
   defaultOption = {},
+  onChange = () => {},
   enableSpecialSelectionOption = false,
   specialSelectionOptionText = SPECIAL_SELECTION[multiSelect]
 }) {
@@ -56,6 +58,10 @@ function Dropdown({
   const [isAllSelected, setIsAllSelected] = useState(false);
   const [showbuttonOpenStyle, setShowButtonOpenStyle] = useState(false);
   const menuRef = useRef();
+
+  useEffect(() => {
+    onChange(selectedValues);
+  }, [onChange, selectedValues]);
 
   const openMenu = () => {
     menuRef.current.open();
