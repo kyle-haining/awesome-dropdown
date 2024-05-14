@@ -22,12 +22,12 @@ function Dropdown({ id, name, value, children}) {
 
   return (
     <>
-      <div
-        className={`${DISPLAY_NAME}-select`}
+      <button
+        className={classNames(`${DISPLAY_NAME}-select`, { open: showMenu })}
         onClick={toggleMenu}
       >
         Select
-      </div>
+      </button>
       <div className={classNames(`${DISPLAY_NAME}-menu`, { hide: !showMenu })}>
         {children}
       </div>

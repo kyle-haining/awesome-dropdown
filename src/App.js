@@ -5,6 +5,7 @@ function App() {
   return (
     <div id="app-container">
       <div>React component app</div>
+      <br />
       <Dropdown>
         <Option id="option-1" >This is an option</Option>
         <Option id="option-2" >This is another option</Option>
