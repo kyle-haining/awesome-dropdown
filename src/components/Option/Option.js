@@ -8,7 +8,7 @@ function Option({
   value,
   highlighted,
   hasCheckbox,
-  children,
+  children: text,
   onMouseOver = () => {},
   onClick = () => {},
   ...rest
@@ -21,7 +21,7 @@ function Option({
     if (hasCheckbox) {
       e.stopPropagation();
     }
-    onClick(value, children);
+    onClick(value, text);
   };
 
   return (
@@ -33,10 +33,10 @@ function Option({
     >
       {hasCheckbox ? (
         <label>
-          <Checkbox value={value} />
-          {children}
+          <Checkbox value={value} checked={highlighted} />
+          {text}
         </label>
-        ) : children
+        ) : text
       }
     </div>
   )

@@ -1,5 +1,5 @@
 import './App.css';
-import { Option, Dropdown } from './components';
+import { Option, Dropdown, SelectMenu, SelectDropdown } from './components';
 
 const values = ['option-1', 'option-2'];
 const labels = ['This is an option', 'This is another option'];
@@ -27,13 +27,13 @@ function App() {
       </div>
       <br />
       <div style={{display: 'flex', gap: '8rem'}}>
-        <Dropdown multiselect enableNoSelectionOption>
+        <SelectDropdown multiselect enableNoSelectionOption>
           {
             values.map((value, i) => (
               <Option key={value} value={value}>{labels[i]}</Option>
             ))
           }
-        </Dropdown>
+        </SelectDropdown>
         <Dropdown multiselect defaultOption={{ value: values[1], text: labels[1] }}>
           {
             values.map((value, i) => (
@@ -42,6 +42,13 @@ function App() {
           }
         </Dropdown>
       </div>
+      {/* <SelectMenu multiselect defaultOption={{ value: values[1], text: labels[1] }}>
+        {
+          values.map((value, i) => (
+            <Option key={value} value={value}>{labels[i]}</Option>
+          ))
+        }
+      </SelectMenu> */}
       {/* <div>Test</div> */}
 
 
