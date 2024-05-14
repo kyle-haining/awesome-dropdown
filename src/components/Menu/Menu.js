@@ -1,5 +1,6 @@
 import {
   useState,
+  useCallback,
   useImperativeHandle,
   forwardRef
 } from 'react';
@@ -9,7 +10,7 @@ import './Menu.css';
 
 const DISPLAY_NAME = 'menu';
 const NO_SELECTION_TEXT = 'None';
-const NO_SELECTION_VALUE = '';
+const NO_SELECTION_VALUE = null;
 
 const Menu = forwardRef(function ({
   id,
@@ -17,7 +18,6 @@ const Menu = forwardRef(function ({
   onChange, // (val) => {}  or  ([val]) => {}
   children,
   selectedValue = null,
-  multiselect = false,
   enableNoSelectionOption = false,
   noSelectionOptionText = NO_SELECTION_TEXT,
 }, ref) {
@@ -56,7 +56,6 @@ const Menu = forwardRef(function ({
           <Option
             value={NO_SELECTION_VALUE}
             highlighted={highlightedValue === NO_SELECTION_VALUE}
-            hasCheckbox={multiselect}
             onMouseOver={handleMouseOver}
             onClick={onChange}
           >
@@ -69,7 +68,6 @@ const Menu = forwardRef(function ({
           {...Component.props}
           key={Component.props.value}
           highlighted={highlightedValue === Component.props.value}
-          hasCheckbox={multiselect}
           onMouseOver={handleMouseOver}
           onClick={onChange}
         >
