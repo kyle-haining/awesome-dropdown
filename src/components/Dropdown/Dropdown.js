@@ -27,7 +27,6 @@ const NO_SELECTION_VALUE = '';
  *   selection
  */
 function Dropdown({
-  onChange, // (val) => {}  or  ([val]) => {}
   label,
   children,
   multiSelect = false,

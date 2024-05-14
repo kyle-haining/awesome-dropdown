@@ -27,7 +27,7 @@ const NO_SELECTION_VALUE = '';
  *   selection
  */
 const Menu = forwardRef(function ({
-  onChange, // (val) => {}  or  ([val]) => {}
+  onChange,
   onSelectAll,
   setShowButtonOpenStyle,
   children,
