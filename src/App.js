@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-import { Checkbox, Option, Dropdown, SelectMenu, SelectDropdown } from './components';
+import { Option, Dropdown } from './components';
 
 const values = ['option-1', 'option-2'];
 const labels = ['This is an option', 'This is another option'];
@@ -12,7 +12,7 @@ function App() {
       <div>React component app</div>
       <br />
       <div style={{display: 'flex', gap: '8rem'}}>
-        <Dropdown enableNoSelectionOption>
+        <Dropdown enableSpecialSelectionOption>
           {
             values.map((value, i) => (
               <Option key={value} value={value}>{labels[i]}</Option>
@@ -29,14 +29,14 @@ function App() {
       </div>
       <br />
       <div style={{display: 'flex', gap: '8rem'}}>
-        <SelectDropdown multiselect enableNoSelectionOption>
+        <Dropdown multiSelect enableSpecialSelectionOption>
           {
             values.map((value, i) => (
               <Option key={value} value={value}>{labels[i]}</Option>
             ))
           }
-        </SelectDropdown>
-        <Dropdown multiselect defaultOption={{ value: values[1], text: labels[1] }}>
+        </Dropdown>
+        <Dropdown multiSelect defaultOption={{ value: values[1], text: labels[1] }}>
           {
             values.map((value, i) => (
               <Option key={value} value={value}>{labels[i]}</Option>
@@ -44,7 +44,6 @@ function App() {
           }
         </Dropdown>
       </div>
-      {/* <div>Test</div> */}
     </div>
   );
 }
